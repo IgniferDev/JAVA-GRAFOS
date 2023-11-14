@@ -53,46 +53,44 @@ public class Grafo {
     }
 
 
+    public int caminoCorto(int inicio, int objetivo) {
+        int distancia = -1; // Inicializar con un valor que indique que no se ha encontrado un camino
+        boolean[] visitado = new boolean[numNodos];
 
-    public int caminoCorto(int a, int b){
+        // Cola para almacenar nodos a procesar junto con su distancia
+        Cola c = new Cola();
+        c.encolar(inicio);
+        c.encolar(0); // La distancia desde el inicio hasta el inicio es 0
 
-        int distancia =0;
-        boolean desvis = false;
-        int[] visitados = new int[numNodos];
+        while (!c.estaVacia()) {
+            int nodoActual = c.desencolar();
+            int distanciaActual = c.desencolar();
 
-        for(int i=0; i<=numNodos;i++){
-            visitados[i]=i;
-        }
+            // Marcar el nodo actual como visitado
+            visitado[nodoActual] = true;
 
-        while()
+            // Verificar si se alcanzó el nodo objetivo
+            if (nodoActual == objetivo) {
+                distancia = distanciaActual;
+                break;
+            }
 
-
-
-        /*
-        int distancia = 0;
-        boolean fin = false;
-        if(verificarAdyacencia(a,b)){
-            return 1;
-        }
-        else {
-            while (!fin) {
-                for (int i = ; i <= numNodos; i++) {
-                    for(int j=0; j<= numNodos; j++){
-                        if(verificarAdyacencia(i,j)){
-                            fin=true;
-
-                        }
-                    }
-                    distancia++;
+            // Explorar nodos adyacentes
+            for (int i = 0; i < numNodos; i++) {
+                if (verificarAdyacencia(nodoActual, i) && !visitado[i]) {
+                    // Agregar el nodo adyacente a la cola junto con su distancia
+                    c.encolar(i);
+                    c.encolar(distanciaActual + 1);
                 }
             }
         }
 
+        if (distancia == -1) {
+            System.out.println("El destino no se puede alcanzar desde el vertice de partida");
+        }
 
-        //System.out.println("La distancia camino mas corto es: " + distancia);
-        return distancia;*/
+        return distancia;
     }
-
 
     public int getNumNodos() {
         return numNodos;
