@@ -2,7 +2,8 @@ import java.util.Scanner;
 
 public class Main {
         public static void main(String[] args){
-
+        //Fernando Morales Cilia
+        //Alfredo Navarrete Montes
 
 
             Grafo g = new Grafo(100);
@@ -17,9 +18,9 @@ public class Main {
                 System.out.println("3. Imprimir matriz de pesos");
                 System.out.println("4. Obtener Grado");
                 System.out.println("5. Verificar Adyacencia");
-                System.out.println("6. Verificar Grafo Convexo");
+                System.out.println("6. Verificar Grafo Conexo");
                 System.out.println("7. Verificar pesos positivos");
-                System.out.println("8. Longitud mas corta de un nodo a otro");
+                System.out.println("8. Longitud mas corta de un nodo a otro(Dijkstra)");
                 System.out.println("9. Camino mas corto de un nodo a otro");
                 System.out.println("0. Salir");
 
@@ -117,7 +118,7 @@ public class Main {
 
                         int cr=g.caminoCorto(i, f);
 
-                        System.out.println("Distancia mas corta de i a f es: " + cr);
+                        System.out.println("Distancia mas corta de nodoInicial a nodoFinal es: " + cr);
 
                         break;
                     }
@@ -136,14 +137,5 @@ public class Main {
                 }
 
             }while(op != 0);
-
-
-
-
-
-
         }
-
-
-
 }

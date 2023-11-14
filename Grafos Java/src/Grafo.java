@@ -39,7 +39,7 @@ public class Grafo {
     }
 
     private int obtenerVerticeConDistanciaMinima(int[] distancias, boolean[] visitados) {
-        int minDistancia = Integer.MAX_VALUE;
+        int minDistancia = Integer.MAX_VALUE; //haciendo referencia a infinito
         int minVertice = -1;
 
         for (int v = 0; v < numNodos; v++) {
@@ -48,7 +48,6 @@ public class Grafo {
                 minVertice = v;
             }
         }
-
         return minVertice;
     }
 
@@ -70,8 +69,8 @@ public class Grafo {
             visitado[nodoActual] = true;
 
             // Verificar si se alcanzó el nodo objetivo
-            if (nodoActual == objetivo) {
-                distancia = distanciaActual;
+            if (nodoActual == objetivo-1) {
+                distancia = distanciaActual+1;
                 break;
             }
 
@@ -84,11 +83,9 @@ public class Grafo {
                 }
             }
         }
-
         if (distancia == -1) {
             System.out.println("El destino no se puede alcanzar desde el vertice de partida");
         }
-
         return distancia;
     }
 
@@ -98,7 +95,7 @@ public class Grafo {
 
     public void setNumNodos(int numNodos) {
         this.numNodos = numNodos;
-
+        //set de la clase
     }
 
     public void agregarPeso(int a, int b) {
@@ -106,6 +103,7 @@ public class Grafo {
         System.out.println("Peso:");
         int peso = s.nextInt();
         matrizPesos[b-1][a-1] = peso;
+        //agrega peso de esta forma para que sea igual de a-b y b-a
         matrizPesos[a-1][b-1] = peso;
 
     }
@@ -114,12 +112,14 @@ public class Grafo {
         Scanner s = new Scanner(System.in);
         System.out.println("Numero de aristas: ");
         int ar = s.nextInt();
-        for (int i = 0; i < ar; i++) {
+        for (int i = 0; i < ar; i++) {//ciclo conforme a las aristas a ingresar
             System.out.println("Nodo a: ");
             int a = s.nextInt();
             System.out.println("Nodo b: ");
             int b = s.nextInt();
+            //se solicita que nodos se van a unir por la arista
             agregarPeso(a, b);
+            //se manda a la funcion de peso para asignar un valor
         }
     }
 
@@ -132,7 +132,7 @@ public class Grafo {
         }
     }
 
-    public int obtenerGrado(int n) {
+    public int obtenerGrado(int n) {//CANTIDAD DE ARISTAS QUE INCIDEN EN EL
         int cont = 0;
         for (int j = 0; j < numNodos; j++) {
             if (matrizPesos[n-1][j] > 0) {
@@ -150,7 +150,7 @@ public class Grafo {
         }
     }
 
-    public boolean verificarGrafoConexo() {
+    public boolean verificarGrafoConexo() {//QUE TODOS ESTEN CONECTADOS POR AL MENOS UN CAMINO
         //correccion
         boolean ret=true;
         int in=0;
@@ -158,8 +158,6 @@ public class Grafo {
         for (int i = 0; i < numNodos; i++) {
             visitados[i] = false;
         }
-
-
         for(int i=in; i<numNodos; i++){
             for(int j=0; j<numNodos; j++){
                 if (matrizPesos[i][j]!=0) {
@@ -168,7 +166,6 @@ public class Grafo {
                 }
             }
         }
-
         for(int i=0; i<numNodos; i++){
             if(visitados[i]){
                 ret=true;
@@ -176,21 +173,8 @@ public class Grafo {
             else{
                 ret=false;
             }
-
-
-
         }
         return ret;
-
-        /*boolean conexo = true;
-        for (int i = 0; i < numNodos; i++) {
-            for (int j = i + 1; j < numNodos; j++) {
-                if (matrizPesos[i][j] <= 0 || matrizPesos[j][i] <= 0) {
-                    conexo = false;
-                }
-            }
-        }
-        return (conexo);*/
     }
 
     public boolean verificarPesosPositivos() {
